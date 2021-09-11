@@ -52,7 +52,7 @@ namespace ZooBook.Application.CommandHandlers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new ApplicationException(ex.ToString());
             }
         }
         #endregion

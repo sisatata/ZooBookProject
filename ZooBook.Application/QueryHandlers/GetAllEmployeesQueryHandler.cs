@@ -39,7 +39,7 @@ namespace ZooBook.Application.QueryHandlers
             }
             catch( Exception ex)
             {
-                throw ex;
+                throw new ApplicationException(ex.ToString());
             }
         }
         #endregion
