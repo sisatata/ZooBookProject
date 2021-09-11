@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +9,7 @@ using ZooBook.Domain.Models;
 namespace ZooBook.Application.Commands
 {
     [AutoMap(typeof(Employee))]
-  public  class CreateEmployeeCommand : IRequest<CommonResponseDto>
+    public class UpdateEmployeeCommand : IRequest<CommonResponseDto>
     {
         [Required(ErrorMessage = "First Name name is required")]
         [StringLength(50, ErrorMessage = "Must be between {2} and {1} characters long.", MinimumLength = 5)]
@@ -21,5 +20,6 @@ namespace ZooBook.Application.Commands
         [Required(ErrorMessage = "Last Name name is required")]
         [StringLength(50, ErrorMessage = "Must be between {2} and {1} characters long.", MinimumLength = 5)]
         public string LastName { get; set; }
+        public Guid Id { get; set; }
     }
 }

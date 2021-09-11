@@ -21,14 +21,14 @@ namespace ZooBook.Data.Repository
         public async Task<T> AddAsync(T entity)
         {
             await _employeeRecordsDbContext.Set<T>().AddAsync(entity);
-           // await _employeeRecordsDbContext.SaveChangesAsync();
+            await _employeeRecordsDbContext.SaveChangesAsync();
             return entity;
         }
 
         public async Task DeleteAsync(T entity)
         {
             _employeeRecordsDbContext.Set<T>().Remove(entity);
-          //  await _employeeRecordsDbContext.SaveChangesAsync();
+            await _employeeRecordsDbContext.SaveChangesAsync();
         }
         public async Task<T> GetByIdAsync(TId id)
         {
@@ -36,13 +36,14 @@ namespace ZooBook.Data.Repository
         }
         public async Task<IList<T>> GetAll()
         {
-            return await _employeeRecordsDbContext.Set<T>().AsNoTracking().Where(x => x.IsDeleted != false).ToListAsync();
+            return await _employeeRecordsDbContext.Set<T>().AsNoTracking().Where(x => x.IsDeleted != true).ToListAsync();
         }
 
         public async Task UpdateAsync(T entity)
         {
-
+            _employeeRecordsDbContext.Entry(entity).CurrentValues.SetValues(entity);
             await _employeeRecordsDbContext.SaveChangesAsync();
+            
         }
     }
 }

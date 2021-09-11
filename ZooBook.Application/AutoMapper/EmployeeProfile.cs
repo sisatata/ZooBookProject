@@ -12,6 +12,7 @@ namespace ZooBook.Application.AutoMapper
         public EmployeeProfile()
         {
             CreateMap<CreateEmployeeCommand, Employee>().ReverseMap();
+            CreateMap<UpdateEmployeeCommand, Employee>().ReverseMap();
         }
     }
 }

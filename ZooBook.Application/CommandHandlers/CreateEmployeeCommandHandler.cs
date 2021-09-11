@@ -15,9 +15,12 @@ namespace ZooBook.Application.CommandHandlers
 {
    public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, CommonResponseDto>
     {
+        #region properties
         private readonly IEmployeeRepository _repository;
         private readonly IMapper _autoMapper;
-      
+        #endregion
+
+        #region ctor
         public CreateEmployeeCommandHandler(IEmployeeRepository repository, IMapper autoMapper)
         {
             _repository = repository;
@@ -25,6 +28,9 @@ namespace ZooBook.Application.CommandHandlers
            
 
         }
+        #endregion
+
+        #region method
 
         public async Task<CommonResponseDto> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
@@ -49,5 +55,6 @@ namespace ZooBook.Application.CommandHandlers
                 throw ex;
             }
         }
+        #endregion
     }
 }

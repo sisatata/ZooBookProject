@@ -24,6 +24,10 @@ using ZooBook.Data.Context;
 using ZooBook.Data.Repository;
 using ZooBook.Domain.Interface;
 using ZooBook.Data;
+using ZooBook.Domain.Models;
+using ZooBook.Application.Queries;
+using ZooBook.Application.Queries.Models;
+using ZooBook.Application.QueryHandlers;
 
 namespace ZooBook.Api
 {
@@ -43,7 +47,6 @@ namespace ZooBook.Api
             
             services.AddOptions();
             services.AddScoped(typeof(IAsyncRepository<,>), typeof(EfRepository<,>));
-           // services.AddScoped<IAsyncRepository<,>, EmployeeRepository>();
             services.AddScoped<DbConnection>(c => new SqlConnection(Configuration.GetConnectionString("EmployeeRecordsDbConnection")));
             services.AddDbContext<EmployeeRecordsDbContext>(options =>
             {
@@ -59,12 +62,14 @@ namespace ZooBook.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ZooBook.Api", Version = "v1" });
             });
             services.AddScoped<IRequestHandler<CreateEmployeeCommand, CommonResponseDto>, CreateEmployeeCommandHandler>();
-
+            //services.AddScoped<IRequestHandler<GetAllEmployeesQuery, List<EmployeeDto>>, GetAllEmployeesQueryHandler>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
            
             services.AddAutoMapper(typeof(ZooBook.Application.AutoMapper.AutoMapperConfiguration));
             services.AddScoped<EmployeeRecordsDbContext>();
-           // services.AddScoped<IRequestHandler<CreateCourseCommandV1, CommonResponseDto>, CourseCommandHandler>();
+            services.AddScoped(typeof(List<Employee>), typeof(List<Employee>));
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+            
 
         }
 
